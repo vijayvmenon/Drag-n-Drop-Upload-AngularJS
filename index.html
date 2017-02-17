@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script data-require="angular.js@1.5.x" src="https://code.angularjs.org/1.5.8/angular.js" data-semver="1.5.8"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="ng-file-upload.min.js"></script>
+        <script src="angular-file-upload.min.js"></script>
+        <script src="angular-filereader.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+
+  <body ng-controller="MainCtrl">
+ <div class="container">
+
+
+            <div class="row" ng-form name="myForm">
+
+                <div class="col-sm-4">
+
+                    <h3>Select files</h3>
+
+                    <div ng-show="uploader.isHTML5">
+                        <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                      <div class="well my-drop-zone" style="width:300px" nv-file-drop nv-file-over="" uploader="uploader" 
+                      filters="syncFilter">
+                           <label>
+                          Click here or Drag and Drop file
+                             <input type="file" style="visibility:hidden;" nv-file-select nv-file-over="" uploader="uploader" 
+                             filters="syncFilter" multiple/>
+                            </label> 
+                              <div class="progress" style="margin-bottom: 0;">
+                              <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
+                              </div>
+                            <div>{{uploader.queue[0].file.name}}</div>
+                            
+                              <div ng-show="showAlert" class="alert alert-warning alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                 <strong>Clear the existing file before uploading again!!</strong> 
+                              </div>
+                      </div>
+
+                    </div>
+                  </div>
+                <div class="col-sm-offset-1 col-sm-6">
+                 <h3>File Data</h3>
+                <textarea name="csvTextarea" rows="5" cols="60" placeholder="Enter Data in csv without space" ng-model="fileData" ng-pattern="csvPattern" required></textarea>
+                 <span ng-show="myForm.csvTextarea.$error.pattern">Not a valid csv!</span>
+                </div>
+
+                <div class="col-sm-1">
+                <h3>Buttons</h3>
+                <div class="row">
+                 <button class="btn btn-primary" ng-disabled="myForm.csvTextarea.$invalid || myForm.csvTextarea.$error.pattern" style="width:80px;margin-top:8px">Search</button>
+                 </div>
+                 <div class="row">
+                <button class="btn btn-clear" style="width:80px;margin-top:8px" ng-click="clearData()">Clear</button>
+                </div>
+                </div>                
+
+            </div>
+
+      </div>
+  </body>
+</html>
